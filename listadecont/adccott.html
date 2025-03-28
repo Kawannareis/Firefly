@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar contatos</title>
+  <link>
+  <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      
+      .container {
+        background: #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(255, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+      }
+      
+      h1 {
+        color: #ffffff;
+      }
+      
+      form input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #000000;
+        border-radius: 4px;
+      }
+      
+      button {
+        background: #e2b900;
+        color: rgb(0, 0, 0);
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background: #ff7e7e;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      
+      li {
+        background: #f9f9f9;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+      
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agenda de Contatos</h1>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Nome" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <button type="submit">Adicionar Contato</button>
+    </form>
+    <ul id="contactList"></ul>
+  </div>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+      
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+      
+        if (name && email) {
+          const contactList = document.getElementById('contactList');
+          const listItem = document.createElement('li');
+          listItem.textContent = `${name} - ${email}`;
+          contactList.appendChild(listItem);
+      
+          document.getElementById('contactForm').reset();
+        } else {
+          alert('Por favor, preencha todos os campos!');
+        }
+      });
+      
+  </script>
+</body>
+</html>
