@@ -7,10 +7,11 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',         
-    password: '',         
-    database: 'agenda'
+    host: '10.113.35.12', 
+    user: 'root', 
+    password: 'root',
+    database: 'agenda',
+    port: 3306             
 });
 
 db.connect(err => {
