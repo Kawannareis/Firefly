@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #000;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    color: #ffaa00;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bolder;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.firefly {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #ffff99, #ffaa00, transparent);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.5); }
+}
+
+.container {
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 1300px;
+}
+
+.contato {
+    background-color: rgb(212, 166, 38);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.contato:hover {
+    transform: scale(1.05);
+}
+
+.contato h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #dddddd;
+}
+
+.contato h2,
+.contato h3 {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Botão Criar Contato */
+#criarContato {
+    display: block;
+    margin: 30px auto 10px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: rgb(212, 166, 38);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+#criarContato:hover {
+    background-color:  rgb(255, 206, 73);
+}
+
+/* Estilo do Formulário */
+#formContato {
+    margin: 20px auto;
+    background-color: #fff4b5;
+    padding: 20px;
+    border: 2px solid #ffed4f;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#formContato input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* Estilisx do botão de excluiiirrrrrrr */
+
+.excluirContato {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.excluirContato:hover {
+    background-color: #ff0000;
+}
