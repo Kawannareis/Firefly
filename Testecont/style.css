@@ -89,23 +89,30 @@ header {
 
 /* Estilo do Formulário */
 #formContato {
+    position: relative;
     margin: 20px auto;
-    background-color: #fff4b5;
-    padding: 20px;
-    border: 2px solid #ffed4f;
-    border-radius: 10px;
+    background-color: #ffec96;
+    padding: 20px 25px;
+    border: 1px solid #ffec96;
+    border-radius: 12px;
     max-width: 400px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 #formContato input {
     display: block;
     width: 100%;
     margin-bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
+    padding: 12px 10px;
+    font-size: 16px;
     border-radius: 6px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
 }
+
 
 /* Estilisx do botão de excluiiirrrrrrr */
 
@@ -126,4 +133,89 @@ header {
 
 .excluirContato:hover {
     background-color: #ff0000;
+}
+
+/* Estilo do botão de salvar o cont (atualizado) */
+
+#salvarContato {
+    padding: 12px 20px;
+    background-color: #a59716;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#salvarContato:hover {
+    background-color: #218838;
+}
+
+/* Estilo do botão de esconder o formsss - ta ok por enquanto - */
+
+.botao-flutuante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.botao-flutuante button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.botao-flutuante button:hover {
+    transform: scale(1.1);
+}
+
+/* Botão para fechar o formulário  (Arrumado) */
+
+.btn-fechar {
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.btn-fechar:hover {
+    color: #ff0000;
+}
+
+/* Barra de pesquisa _ teste _ */
+
+.pesquisa-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+#pesquisarContato {
+    padding: 10px 15px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+#pesquisarContato:focus {
+    border-color: #ffaa00;
+    box-shadow: 0 0 8px rgba(255, 170, 0, 0.5);
 }

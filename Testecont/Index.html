@@ -9,15 +9,23 @@
 <body>
   <header>
     Agenda de contatos
-  </header>
 
-  <button id="criarContato">Criar Contato</button>
+    <div class="pesquisa-container">
+        <input type="text" id="pesquisarContato" placeholder="Pesquisar contato...">
+      </div>
+  </header>
+  <div class="botao-flutuante">
+
+    <button id="criarContato">➕</button>
+  </div>
 
   <div id="formContato" style="display: none;">
+    <button id="fecharFormulario" class="btn-fechar">✖</button>
     <input type="text" id="nome" placeholder="Nome">
     <input type="text" id="telefone" placeholder="Telefone">
     <input type="email" id="email" placeholder="Email">
     <button id="salvarContato">Salvar Contato</button>
+    
   </div>
 
   <div class="container">
@@ -25,40 +33,40 @@
       <h1>Nome: Amanda</h1>
       <h2>Telefone: (11) 99999-9999</h2>
       <h3>Email: Amanda02@gmail.com</h3>
-      <button class="excluirContato">Excluir</button>
+      <button class="excluirContato">X</button>
     </div>
 
     <div class="contato">
         <h1>Nome: Bernardo</h1>
         <h2>Telefone: (11) 99999-9999</h2>
         <h3>Email: bernado001@gmail.com</h3>
-        <button class="excluirContato">Excluir</button>
+        <button class="excluirContato">X</button>
     </div>
 
     <div class="contato">
         <h1>Nome: Carol</h1>
         <h2>Telefone: (11) 99999-9999</h2>
         <h3>Email: Caroline0976@gmail.com</h3>
-        <button class="excluirContato">Excluir</button>
+        <button class="excluirContato">X</button>
     </div>
 
                               
     <div class="contato">
         <h1> Nome: Daniel</h1>
         <h2> Telefone: (11) 99999-9999 </h2>
-        <h3> Email: Danielpascoal@gmail.com</h3> <button class="excluirContato">Excluir</button>
+        <h3> Email: Danielpascoal@gmail.com</h3> <button class="excluirContato">X</button>
     </div>
     <div class="contato">
             <h1>Nome: Eduardo</h1>
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Eduardoinds@gmail.com</h3>
-            <button class="excluirContato">Excluir</button>
+            <button class="excluirContato">X</button>
         </div>
 <div class="contato">
         <h1>Nome: Fernanda</h1>
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Nanda05@gmail.com</h3>
-            <button class="excluirContato">Excluir</button>
+            <button class="excluirContato">X</button>
         </div>
         
                             
@@ -66,80 +74,72 @@
             <h1>Nome: Gabriel</h1>
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Gabriel.0oii@gmail.com</h3>
-            <button class="excluirContato">Excluir</button>
+            <button class="excluirContato">X</button>
         </div>
 
+                               
+        <div class="contato">
+            <h1>Nome: Heloisa</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: Helo.silva@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
 
+                                    
+        <div class="contato">
+            <h1>Nome: Igor</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: IgorVieira@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
 
+                                        
+        <div class="contato">
+            <h1>Nome: Juliana</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: Juliana.almeida@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
 
-  </div>
+                                            
+        <div class="contato">
+            <h1>Nome: Lucas</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: LucasSouza@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
 
-  <script>
-    const numFireflies = 50;
-    for (let i = 0; i < numFireflies; i++) {
-      const firefly = document.createElement('div');
-      firefly.classList.add('firefly');
-      document.body.appendChild(firefly);
-      firefly.style.top = Math.random() * window.innerHeight + 'px';
-      firefly.style.left = Math.random() * window.innerWidth + 'px';
-      animateFirefly(firefly);
-    }
+                                                
+        <div class="contato">
+            <h1>Nome: Mariana</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: MarianaRocha@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
 
-    function animateFirefly(firefly) {
-      const deltaX = (Math.random() - 0.5) * 100;
-      const deltaY = (Math.random() - 0.5) * 100;
-      const duration = 4000 + Math.random() * 3000;
-      firefly.animate([
-        { transform: 'translate(0, 0)' },
-        { transform: `translate(${deltaX}px, ${deltaY}px)` }
-      ], {
-        duration: duration,
-        iterations: Infinity,
-        direction: 'alternate',
-        easing: 'ease-in-out'
-      });
-    }
-
-    // Mostrar formulário // 
-    document.getElementById('criarContato').addEventListener('click', () => {
-      document.getElementById('formContato').style.display = 'block';
-    });
-
-    // Adicionar contato (Reformulada) // 
-    document.getElementById('salvarContato').addEventListener('click', () => {
-      const nome = document.getElementById('nome').value;
-      const telefone = document.getElementById('telefone').value;
-      const email = document.getElementById('email').value;
-
-      if (nome && telefone && email) {
-        const novoContato = document.createElement('div');
-        novoContato.classList.add('contato');
-        novoContato.innerHTML = `
-          <h1>Nome: ${nome}</h1>
-          <h2>Telefone: ${telefone}</h2>
-          <h3>Email: ${email}</h3>
-          <button class="excluirContato">Excluir</button>
-        `;
-        document.querySelector('.container').appendChild(novoContato);
-        document.getElementById('formContato').reset();
-        document.getElementById('formContato').style.display = 'none';
-        aplicarEventosExcluir();
-      } else {
-        alert('Por favor, preencha todos os campos!');
-      }
-    });
-
-    // Função para excluir contato : ) ( Sem erro) // 
-    function aplicarEventosExcluir() {
-      document.querySelectorAll('.excluirContato').forEach(botao => {
-        botao.onclick = () => {
-          botao.parentElement.remove();
-        };
-      });
-    }
-
-    // coloca os eventos aos contatos que já existentess// 
-    aplicarEventosExcluir();
-  </script>
+                                                   
+        <div class="contato">
+            <h1>Nome: Natália</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: Nat004@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
+        
+                                                      
+        <div class="contato">
+            <h1>Nome: Otávio</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: 0taviox@gmail.com</h3>
+            <button class="excluirContato">X</button>
+        </div>
+                                                           
+        <div class="contato">
+            <h1>Nome: Paula</h1>
+            <h2>Telefone: (11) 99999-9999</h2>
+            <h3>Email: Paula.009@gmail.com</h3>
+            <button class="excluirContato"> X </button>
+        </div>
+</div>
+  <script src="script.js"></script>
 </body>
 </html>
