@@ -329,6 +329,56 @@
         }
     });
 </script>
+<script>
+    function carregarContatos() {
+        fetch("http://localhost:3000/contatos")
+            .then(res => res.json())
+            .then(contatos => {
+                const lista = document.getElementById("mainContactList");
+                lista.innerHTML = ""; // limpa a lista antes de adicionar os contatos
+
+                contatos.forEach(contato => {
+                    const listItem = document.createElement('li');
+                    const span = document.createElement('span');
+                    span.textContent = `${contato.nome} - ${contato.numero} - ${contato.email}`;
+                    listItem.appendChild(span);
+
+                    const trashLink = document.createElement('a');
+                    trashLink.href = "#";
+                    const trashIcon = document.createElement('img');
+                    trashIcon.src = "lixeira.png";
+                    trashIcon.alt = "lixeira";
+                    trashIcon.className = "icone-lixo";
+                    trashLink.appendChild(trashIcon);
+                    listItem.appendChild(trashLink);
+
+                    const arrowLink = document.createElement('a');
+                    arrowLink.href = "teste.html";
+                    const arrowIcon = document.createElement('img');
+                    arrowIcon.src = "./flecha.png";
+                    arrowIcon.alt = "Flecha";
+                    arrowIcon.className = "icone";
+                    arrowLink.appendChild(arrowIcon);
+                    listItem.appendChild(arrowLink);
+
+                    trashIcon.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        listItem.remove();
+                    });
+
+                    lista.appendChild(listItem);
+                });
+            })
+            .catch(err => {
+                console.error("Erro ao carregar contatos:", err);
+                alert("Erro ao buscar contatos!");
+            });
+    }
+
+    // Chama a função quando a página carregar
+    window.addEventListener("load", carregarContatos);
+</script>
+
 </body>
 </html>
 

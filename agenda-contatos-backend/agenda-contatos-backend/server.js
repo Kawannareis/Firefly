@@ -35,7 +35,7 @@ app.post('/contatos', (req, res) => {
             console.error('Erro ao inserir no banco de dados:', err);
             return res.status(500).send('Erro ao adicionar contato');
         }
-        console.log('✅ Contato adicionado com sucesso! ID:', result.insertId);
+        console.log('Contato adicionado com sucesso! ID:', result.insertId);
         res.status(200).send({ message: 'Contato adicionado com sucesso!' });
     });
 });
