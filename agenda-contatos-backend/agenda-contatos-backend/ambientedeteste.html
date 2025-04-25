@@ -335,7 +335,7 @@
             .then(res => res.json())
             .then(contatos => {
                 const lista = document.getElementById("mainContactList");
-                lista.innerHTML = ""; // limpa a lista antes de adicionar os contatos
+                lista.innerHTML = ""; 
 
                 contatos.forEach(contato => {
                     const listItem = document.createElement('li');
@@ -374,8 +374,6 @@
                 alert("Erro ao buscar contatos!");
             });
     }
-
-    // Chama a função quando a página carregar
     window.addEventListener("load", carregarContatos);
 </script>
 
