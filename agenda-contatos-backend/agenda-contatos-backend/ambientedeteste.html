@@ -202,43 +202,97 @@
         </div>
     </div>
 
+<script>
+    const popup = document.getElementById('popup');
+    const openPopup = document.getElementById('open-popup');
+    const closePopup = document.getElementById('close-popup');
+    const mainContactList = document.getElementById('mainContactList');
+    const popupContactList = document.getElementById('popupContactList');
 
-    <script>
-        const popup = document.getElementById('popup');
-        const openPopup = document.getElementById('open-popup');
-        const closePopup = document.getElementById('close-popup');
-        const mainContactList = document.getElementById('mainContactList');
-        const popupContactList = document.getElementById('popupContactList');
-        
-        openPopup.addEventListener('click', (e) => {
-            e.preventDefault();
-            popup.style.display = 'flex';
-        });
+    openPopup.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.style.display = 'flex';
+    });
 
-        closePopup.addEventListener('click', () => {
+    closePopup.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
             popup.style.display = 'none';
-        });
+        }
+    });
 
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                popup.style.display = 'none';
+    document.querySelectorAll('#mainContactList li').forEach(function(li) {
+        const span = document.createElement('span');
+        span.textContent = li.textContent;
+        li.textContent = '';
+        li.appendChild(span);
+
+        const trashLink = document.createElement('a');
+        trashLink.href = "#";
+        const trashIcon = document.createElement('img');
+        trashIcon.src = "lixeira.png";
+        trashIcon.alt = "lixeira";
+        trashIcon.className = "icone-lixo";
+        trashLink.appendChild(trashIcon);
+
+        const arrowLink = document.createElement('a');
+        arrowLink.href = "teste.html";
+        const arrowIcon = document.createElement('img');
+        arrowIcon.src = "./flecha.png";
+        arrowIcon.alt = "Flecha";
+        arrowIcon.className = "icone";
+        arrowLink.appendChild(arrowIcon);
+
+        li.appendChild(trashLink);
+        li.appendChild(arrowLink);
+
+        trashIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            li.remove();
+        });
+    });
+
+    document.querySelectorAll('.icone-lixo').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const li = btn.closest('li');
+            if (li) {
+                li.remove();
             }
         });
+    });
+</script>
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-        
-            const name = document.getElementById('name').value;
-            const number = document.getElementById('number').value;
-            const email = document.getElementById('email').value;
-        
-            if (name && number && email) {
+<script>
+    let removedContacts = [];
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const number = document.getElementById('number').value;
+        const email = document.getElementById('email').value;
+
+        if (name && number && email) {
+            fetch('http://localhost:3000/contatos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome: name, numero: number, email })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message || 'Contato adicionado com sucesso!');
+
                 const listItem = document.createElement('li');
-        
                 const span = document.createElement('span');
                 span.textContent = `${name} - ${number} - ${email}`;
                 listItem.appendChild(span);
-        
+
                 const trashLink = document.createElement('a');
                 trashLink.href = "#";
                 const trashIcon = document.createElement('img');
@@ -247,7 +301,7 @@
                 trashIcon.className = "icone-lixo";
                 trashLink.appendChild(trashIcon);
                 listItem.appendChild(trashLink);
-        
+
                 const arrowLink = document.createElement('a');
                 arrowLink.href = "teste.html";
                 const arrowIcon = document.createElement('img');
@@ -256,127 +310,25 @@
                 arrowIcon.className = "icone";
                 arrowLink.appendChild(arrowIcon);
                 listItem.appendChild(arrowLink);
-        
-                mainContactList.appendChild(listItem);
+
+                document.getElementById('mainContactList').appendChild(listItem);
                 document.getElementById('contactForm').reset();
-        
+
                 trashIcon.addEventListener('click', function(e) {
                     e.preventDefault();
+                    removedContacts.push(`${name} - ${number} - ${email}`);
                     listItem.remove();
                 });
-            } else {
-                alert('Por favor, preencha todos os campos!');
-            }
-        });
-        
-        document.querySelectorAll('#mainContactList li').forEach(function(li) {
-            const span = document.createElement('span');
-            span.textContent = li.textContent;
-            li.textContent = '';
-            li.appendChild(span);
-        
-            const trashLink = document.createElement('a');
-            trashLink.href = "#";
-            const trashIcon = document.createElement('img');
-            trashIcon.src = "lixeira.png";
-            trashIcon.alt = "lixeira";
-            trashIcon.className = "icone-lixo";
-            trashLink.appendChild(trashIcon);
-        
-            const arrowLink = document.createElement('a');
-            arrowLink.href = "teste.html";
-            const arrowIcon = document.createElement('img');
-            arrowIcon.src = "./flecha.png";
-            arrowIcon.alt = "Flecha";
-            arrowIcon.className = "icone";
-            arrowLink.appendChild(arrowIcon);
-        
-            li.appendChild(trashLink);
-            li.appendChild(arrowLink);
-        
-            trashIcon.addEventListener('click', function(e) {
-                e.preventDefault();
-                li.remove();
+            })
+            .catch(err => {
+                console.error('Erro ao adicionar contato:', err);
+                alert('Erro ao adicionar contato!');
             });
-        });
-        
-
-        document.querySelectorAll('.icone-lixo').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const li = btn.closest('li');
-                if (li) {
-                    li.remove();
-                }
-            });
-        });
-        
-    </script>
-    <script>
-        let removedContacts = [];
-        
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-        
-            const name = document.getElementById('name').value;
-            const number = document.getElementById('number').value;
-            const email = document.getElementById('email').value;
-        
-            if (name && number && email) {
-                // Envia para o backend
-                fetch('http://localhost:3000/contatos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ nome: name, numero: number, email })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    alert(data.message || 'Contato adicionado com sucesso!');
-        
-                    const listItem = document.createElement('li');
-        
-                    const span = document.createElement('span');
-                    span.textContent = `${name} - ${number} - ${email}`;
-                    listItem.appendChild(span);
-        
-                    const trashLink = document.createElement('a');
-                    trashLink.href = "#";
-                    const trashIcon = document.createElement('img');
-                    trashIcon.src = "lixeira.png";
-                    trashIcon.alt = "lixeira";
-                    trashIcon.className = "icone-lixo";
-                    trashLink.appendChild(trashIcon);
-                    listItem.appendChild(trashLink);
-        
-                    const arrowLink = document.createElement('a');
-                    arrowLink.href = "teste.html";
-                    const arrowIcon = document.createElement('img');
-                    arrowIcon.src = "./flecha.png";
-                    arrowIcon.alt = "Flecha";
-                    arrowIcon.className = "icone";
-                    arrowLink.appendChild(arrowIcon);
-                    listItem.appendChild(arrowLink);
-        
-                    document.getElementById('mainContactList').appendChild(listItem);
-                    document.getElementById('contactForm').reset();
-        
-                    trashIcon.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        removedContacts.push(`${name} - ${number} - ${email}`);
-                        listItem.remove();
-                    });
-                })
-                .catch(err => {
-                    console.error('Erro ao adicionar contato:', err);
-                    alert('Erro ao adicionar contato!');
-                });
-            } else {
-                alert('Por favor, preencha todos os campos!');
-            }
-        });
-        </script>        
+        } else {
+            alert('Por favor, preencha todos os campos!');
+        }
+    });
+</script>
 </body>
 </html>
 
