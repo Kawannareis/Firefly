@@ -15,7 +15,7 @@ header {
 }
 
 .firefly {
-    position: absolute;
+    position: fixed;
     width: 4px;
     height: 4px;
     background: radial-gradient(circle, #ffff99, #ffaa00, transparent);
@@ -147,10 +147,12 @@ header {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-left: 120px;
 }
 
 #salvarContato:hover {
-    background-color: #218838;
+    background-color: #ceaf00;
 }
 
 /* Estilo do botão de esconder o formsss - ta ok por enquanto - */
@@ -219,3 +221,47 @@ header {
     border-color: #ffaa00;
     box-shadow: 0 0 8px rgba(255, 170, 0, 0.5);
 }
+
+.editarContato {
+    background-color: #ffaa00;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.editarContato:hover {
+    background-color: #ffc533;
+}
+
+
+footer{
+    text-align: center;
+    color: rgb(92, 92, 92);
+}
+
+/* Mensagem para confirmar que o contato foi excluído */
+#mensagemSucesso {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50px);
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-size: 16px;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.lixeira{
+text-align: center;
+    
+}
+

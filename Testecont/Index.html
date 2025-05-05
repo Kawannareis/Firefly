@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agenda de Contatos</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="imagex/png" href="./pipipopo-removebg-preview (1).png">
 </head>
+  
 <body>
+    <div id="mensagemSucesso" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #28a745; color: white; padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 16px; z-index: 2000;">
+    Contato excluído com sucesso!
+  </div>
   <header>
     Agenda de contatos
 
     <div class="pesquisa-container">
         <input type="text" id="pesquisarContato" placeholder="Pesquisar contato...">
       </div>
+      
   </header>
   <div class="botao-flutuante">
 
@@ -25,15 +31,16 @@
     <input type="text" id="telefone" placeholder="Telefone">
     <input type="email" id="email" placeholder="Email">
     <button id="salvarContato">Salvar Contato</button>
-    
+   
   </div>
-
   <div class="container">
+
     <div class="contato">
       <h1>Nome: Amanda</h1>
       <h2>Telefone: (11) 99999-9999</h2>
       <h3>Email: Amanda02@gmail.com</h3>
       <button class="excluirContato">X</button>
+      <button class="editarContato">Editar</button>
     </div>
 
     <div class="contato">
@@ -41,6 +48,7 @@
         <h2>Telefone: (11) 99999-9999</h2>
         <h3>Email: bernado001@gmail.com</h3>
         <button class="excluirContato">X</button>
+        <button class="editarContato">Editar</button>
     </div>
 
     <div class="contato">
@@ -48,6 +56,7 @@
         <h2>Telefone: (11) 99999-9999</h2>
         <h3>Email: Caroline0976@gmail.com</h3>
         <button class="excluirContato">X</button>
+        <button class="editarContato">Editar</button>
     </div>
 
                               
@@ -55,18 +64,21 @@
         <h1> Nome: Daniel</h1>
         <h2> Telefone: (11) 99999-9999 </h2>
         <h3> Email: Danielpascoal@gmail.com</h3> <button class="excluirContato">X</button>
+        <button class="editarContato">Editar</button>
     </div>
     <div class="contato">
             <h1>Nome: Eduardo</h1>
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Eduardoinds@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 <div class="contato">
         <h1>Nome: Fernanda</h1>
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Nanda05@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
         
                             
@@ -75,6 +87,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Gabriel.0oii@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                
@@ -83,6 +96,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Helo.silva@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                     
@@ -91,6 +105,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: IgorVieira@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                         
@@ -99,6 +114,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Juliana.almeida@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                             
@@ -107,6 +123,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: LucasSouza@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                                 
@@ -115,6 +132,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: MarianaRocha@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
 
                                                    
@@ -123,6 +141,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Nat004@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
         
                                                       
@@ -131,6 +150,7 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: 0taviox@gmail.com</h3>
             <button class="excluirContato">X</button>
+            <button class="editarContato">Editar</button>
         </div>
                                                            
         <div class="contato">
@@ -138,8 +158,19 @@
             <h2>Telefone: (11) 99999-9999</h2>
             <h3>Email: Paula.009@gmail.com</h3>
             <button class="excluirContato"> X </button>
+            <button class="editarContato">Editar</button>
         </div>
 </div>
+<div class="lixeira">
+   <h2>
+    
+    <br>
+    <a href="./Lixeira.html" id="btnLixeira"> 🗑️</a>
+
+   </h2>
+</div>
+    <footer>
+        <p>Desenvolvido por Kawanna- Marcos - Alan</p> </footer>
   <script src="script.js"></script>
 </body>
 </html>
