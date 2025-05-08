@@ -133,44 +133,53 @@ function mostrarMensagemSucesso() {
 }
 
 function aplicarEventosEdicao() {
-  document.querySelectorAll('.editarContato').forEach(botao => {
-    botao.onclick = () => {
-      contatoEditando = botao.closest('.contato');
+  const container = document.querySelector('.container');
+
+  container.addEventListener('click', function (e) {
+    if (e.target.classList.contains('editarContato')) {
+      contatoEditando = e.target.closest('.contato');
       document.getElementById('nome').value = contatoEditando.querySelector('h1').textContent.replace('Nome: ', '');
       document.getElementById('telefone').value = contatoEditando.querySelector('h2').textContent.replace('Telefone: ', '');
       document.getElementById('email').value = contatoEditando.querySelector('h3').textContent.replace('Email: ', '');
       document.getElementById('salvarContato').textContent = 'Atualizar Contato';
       document.getElementById('formContato').style.display = 'block';
-    };
+    }
   });
 }
 
+
 function aplicarEventosExcluir() {
-  document.querySelectorAll('.excluirContato').forEach(botao => {
-    botao.onclick = () => {
-      const contato = botao.closest('.contato');
-      const confirmacao = confirm('Tem certeza que deseja excluir este contato?');
-      if (!confirmacao) return;
+  const container = document.querySelector('.container');
+
+  container.addEventListener('click', function (e) {
+    if (e.target.classList.contains('excluirContato')) {
+      const contato = e.target.closest('.contato');
 
       const nome = contato.querySelector('h1').textContent.replace('Nome: ', '');
       const telefone = contato.querySelector('h2').textContent.replace('Telefone: ', '');
       const email = contato.querySelector('h3').textContent.replace('Email: ', '');
+
+      const confirmacao = confirm('Tem certeza que deseja excluir este contato?');
+      if (!confirmacao) return;
 
       // Salvar na lixeira
       const contatosExcluidos = JSON.parse(localStorage.getItem('contatosExcluidos') || '[]');
       contatosExcluidos.push({ nome, telefone, email });
       localStorage.setItem('contatosExcluidos', JSON.stringify(contatosExcluidos));
 
-      // Remover do localStorage de contatos ativos
+      // Remover do localStorage principal
       let contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
       contatosSalvos = contatosSalvos.filter(c => !(c.nome === nome && c.telefone === telefone && c.email === email));
       localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
 
       // Remover da tela
       contato.remove();
-    };
+
+      mostrarMensagemSucesso();
+    }
   });
 }
+
 
 // ========== Restaurar e Excluir Definitivo ==========
 function aplicarEventosRestaurar() {
@@ -199,12 +208,52 @@ function aplicarEventosRestaurar() {
         <h1>Nome: ${nome}</h1>
         <h2>Telefone: ${telefone}</h2>
         <h3>Email: ${email}</h3>
-        <button class="excluirContato"> X </button>
-        <button class="editarContato">Editar</button>
       `;
+
+      const btnExcluir = document.createElement('button');
+      btnExcluir.className = 'excluirContato';
+      btnExcluir.textContent = 'X';
+      btnExcluir.onclick = aplicarExclusao(novoContato, nome, telefone, email);
+
+      const btnEditar = document.createElement('button');
+      btnEditar.className = 'editarContato';
+      btnEditar.textContent = 'Editar';
+      btnEditar.onclick = () => {
+        contatoEditando = novoContato;
+        document.getElementById('nome').value = nome;
+        document.getElementById('telefone').value = telefone;
+        document.getElementById('email').value = email;
+        document.getElementById('salvarContato').textContent = 'Atualizar Contato';
+        document.getElementById('formContato').style.display = 'block';
+      };
+
+      novoContato.appendChild(btnExcluir);
+      novoContato.appendChild(btnEditar);
+
       document.querySelector('.container').appendChild(novoContato);
       aplicarEventosEdicao();
       aplicarEventosExcluir();
+
+      function aplicarExclusao(contato, nome, telefone, email) {
+        return () => {
+          const confirmacao = confirm('Tem certeza que deseja excluir este contato?');
+          if (!confirmacao) return;
+      
+          // Atualiza localStorage
+          let contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
+          contatosSalvos = contatosSalvos.filter(c => !(c.nome === nome && c.telefone === telefone && c.email === email));
+          localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+      
+          // Move para lixeira
+          const contatosExcluidos = JSON.parse(localStorage.getItem('contatosExcluidos') || '[]');
+          contatosExcluidos.push({ nome, telefone, email });
+          localStorage.setItem('contatosExcluidos', JSON.stringify(contatosExcluidos));
+      
+          // Remove visualmente
+          contato.remove();
+        };
+      }
+      
 
       // Remove da lixeira visual
       contato.remove();
