@@ -176,12 +176,30 @@
       return;
     }
 
-    // Aqui você vai fazer  para o backend para cadastrar o usuário
-
-    mensagemCadastro.style.color = 'green';
-    mensagemCadastro.textContent = "✅ Cadastro simulado com sucesso! Redirecionando para login...";
-    formCadastro.reset();
-    setTimeout(() => { tabLogin.click(); }, 2000);
+    // Enviar dados para o backend
+    fetch('http://localhost:3000/api/cadastro', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nome, email, senha })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.mensagem === 'Usuário cadastrado com sucesso!') {
+        mensagemCadastro.style.color = 'green';
+        mensagemCadastro.textContent = data.mensagem;
+        formCadastro.reset();
+        setTimeout(() => { tabLogin.click(); }, 2000);
+      } else {
+        mensagemCadastro.style.color = 'red';
+        mensagemCadastro.textContent = data.mensagem;
+      }
+    })
+    .catch(err => {
+      mensagemCadastro.style.color = 'red';
+      mensagemCadastro.textContent = 'Erro ao cadastrar usuário.';
+    });
   });
 
   // Login
@@ -195,13 +213,31 @@
       return;
     }
 
-    // Alan aqui você vai fazer uma chamada pro backend para validar o login
-
-    mensagemLogin.style.color = 'green';
-    mensagemLogin.textContent = "✅ Login simulado com sucesso! Redirecionando...";
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 2000);
+    // Enviar dados para o backend
+    fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, senha })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.mensagem === 'Login bem-sucedido.') {
+        mensagemLogin.style.color = 'green';
+        mensagemLogin.textContent = data.mensagem;
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2000);
+      } else {
+        mensagemLogin.style.color = 'red';
+        mensagemLogin.textContent = data.mensagem;
+      }
+    })
+    .catch(err => {
+      mensagemLogin.style.color = 'red';
+      mensagemLogin.textContent = 'Erro ao fazer login.';
+    });
   });
 
   // Efeito vagalumes (inalterado)
@@ -219,10 +255,11 @@
     const deltaX = (Math.random() - 0.5) * 100;
     const deltaY = (Math.random() - 0.5) * 100;
     const duration = 4000 + Math.random() * 3000;
-    firefly.animate([
-      { transform: 'translate(0, 0)' },
-      { transform: `translate(${deltaX}px, ${deltaY}px)` }
-    ], {
+    firefly.animate([{
+      transform: 'translate(0, 0)'
+    }, {
+      transform: `translate(${deltaX}px, ${deltaY}px)`
+    }], {
       duration,
       iterations: Infinity,
       direction: 'alternate',

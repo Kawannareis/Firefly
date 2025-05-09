@@ -6,13 +6,7 @@
   <title>Agenda de Contatos</title>
   <link rel="stylesheet" href="agendaestilo.css">
   <link rel="shortcut icon" type="image/png" href="./pipipopo-removebg-preview (1).png">
-  <script>
-    const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
-  
-    if (!usuario) {
-      window.location.href = "login.html";
-    }
-  </script>
+
   
 </head>
   
@@ -52,7 +46,7 @@
 
 <div class="lixeira">
     
-    <button id="verLixeira"> <a href="./Lixeira.html">Lixeira</a> </button>
+    <button id="verLixeira">Lixeira</button>
 <div class="lixeiraContatos"></div>
 
     <footer>
@@ -60,9 +54,9 @@
         <script src="script.js"></script>
         <script>
           function logout() {
-            localStorage.removeItem('usuarioLogado');
-            window.location.href = "login.html";
-          }
+         window.location.href = "login.html";
+        }
+
         </script>
         
   
