@@ -166,10 +166,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  if (!telefone || !somenteNumerosRegex.test(telefone) || telefone.length < 8) {
-    alert("Telefone inválido. Use apenas números com pelo menos 8 dígitos.");
-    return;
-  }
+  if (!telefone || !somenteNumerosRegex.test(telefone) || telefone.length < 8 || telefone.length > 12) {
+  alert("Telefone inválido. Use apenas números entre 8 e 12 dígitos.");
+  return;
+}
+
 
   if (email && !emailValidoRegex.test(email)) {
     alert("Formato de e-mail inválido.");
