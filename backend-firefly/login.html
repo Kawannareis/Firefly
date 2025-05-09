@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="./pipipopo-removebg-preview (1).png" type="image/x-icon">
+  <title>Login / Cadastro</title>
+  <style>
+    /* Estilos gerais */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Container principal */
+    .container-login {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      z-index: 1;
+    }
+
+    /* Abas */
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: #ffaa00;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .tabs button.active {
+      background: #ffcc33;
+      color: rgb(0, 0, 0);
+    }
+
+    /* Formulários */
+    form {
+      display: none;
+      flex-direction: column;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      background-color: #ffaa00;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .mensagem {
+      margin-top: 10px;
+      font-size: 14px;
+      color: red;
+    }
+
+    /* Vagalumes */
+    .firefly {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #ffff99, #ffaa00, transparent);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: flicker 1.5s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-login">
+    <div class="tabs">
+      <button id="tabLogin" class="active">Login</button>
+      <button id="tabCadastro">Cadastro</button>
+    </div>
+
+    <!-- Formulário de Login -->
+    <form id="formLogin" class="active">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginSenha" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+      <p class="mensagem" id="mensagemLogin"></p>
+    </form>
+
+    <!-- Formulário de Cadastro -->
+    <form id="formCadastro">
+      <input type="text" id="cadastroNome" placeholder="Nome completo" required>
+      <input type="email" id="cadastroEmail" placeholder="Email" required>
+      <input type="password" id="cadastroSenha" placeholder="Senha" required>
+      <button type="submit">Cadastrar</button>
+      <p class="mensagem" id="mensagemCadastro"></p>
+    </form>
+  </div>
+
+<script>
+  // Referências
+  const tabLogin = document.getElementById('tabLogin');
+  const tabCadastro = document.getElementById('tabCadastro');
+  const formLogin = document.getElementById('formLogin');
+  const formCadastro = document.getElementById('formCadastro');
+  const loginEmail = document.getElementById('loginEmail');
+  const loginSenha = document.getElementById('loginSenha');
+  const mensagemLogin = document.getElementById('mensagemLogin');
+  const cadastroNome = document.getElementById('cadastroNome');
+  const cadastroEmail = document.getElementById('cadastroEmail');
+  const cadastroSenha = document.getElementById('cadastroSenha');
+  const mensagemCadastro = document.getElementById('mensagemCadastro');
+
+  // Alternância entre abas
+  tabLogin.addEventListener('click', () => {
+    tabLogin.classList.add('active');
+    tabCadastro.classList.remove('active');
+    formLogin.classList.add('active');
+    formCadastro.classList.remove('active');
+    limparMensagens();
+  });
+
+  tabCadastro.addEventListener('click', () => {
+    tabCadastro.classList.add('active');
+    tabLogin.classList.remove('active');
+    formCadastro.classList.add('active');
+    formLogin.classList.remove('active');
+    limparMensagens();
+  });
+
+  function limparMensagens() {
+    mensagemLogin.textContent = '';
+    mensagemCadastro.textContent = '';
+  }
+
+  // Cadastro
+  formCadastro.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const nome = cadastroNome.value.trim();
+    const email = cadastroEmail.value.trim();
+    const senha = cadastroSenha.value;
+
+    if (!nome || !email || !senha) {
+      mensagemCadastro.textContent = "Preencha todos os campos.";
+      return;
+    }
+
+    // Aqui você vai fazer  para o backend para cadastrar o usuário
+
+    mensagemCadastro.style.color = 'green';
+    mensagemCadastro.textContent = "✅ Cadastro simulado com sucesso! Redirecionando para login...";
+    formCadastro.reset();
+    setTimeout(() => { tabLogin.click(); }, 2000);
+  });
+
+  // Login
+  formLogin.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = loginEmail.value.trim();
+    const senha = loginSenha.value;
+
+    if (!email || !senha) {
+      mensagemLogin.textContent = "Preencha todos os campos.";
+      return;
+    }
+
+    // Alan aqui você vai fazer uma chamada pro backend para validar o login
+
+    mensagemLogin.style.color = 'green';
+    mensagemLogin.textContent = "✅ Login simulado com sucesso! Redirecionando...";
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+  });
+
+  // Efeito vagalumes (inalterado)
+  const numFireflies = 50;
+  for (let i = 0; i < numFireflies; i++) {
+    const firefly = document.createElement('div');
+    firefly.classList.add('firefly');
+    document.body.appendChild(firefly);
+    firefly.style.top = Math.random() * window.innerHeight + 'px';
+    firefly.style.left = Math.random() * window.innerWidth + 'px';
+    animateFirefly(firefly);
+  }
+
+  function animateFirefly(firefly) {
+    const deltaX = (Math.random() - 0.5) * 100;
+    const deltaY = (Math.random() - 0.5) * 100;
+    const duration = 4000 + Math.random() * 3000;
+    firefly.animate([
+      { transform: 'translate(0, 0)' },
+      { transform: `translate(${deltaX}px, ${deltaY}px)` }
+    ], {
+      duration,
+      iterations: Infinity,
+      direction: 'alternate',
+      easing: 'ease-in-out'
+    });
+  }
+</script>
+
+</body>
+</html>
