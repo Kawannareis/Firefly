@@ -152,56 +152,72 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("salvarContato").addEventListener("click", async () => {
-    const nome = document.getElementById("nome").value;
-    const telefone = document.getElementById("telefone").value;
-    const email = document.getElementById("email").value;
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const email = document.getElementById("email").value.trim();
 
-    if (!nome || !telefone) {
-      alert("Preencha os campos obrigatórios: nome e telefone.");
-      return;
-    }
+  const somenteLetrasRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+  const somenteNumerosRegex = /^\d+$/;
+  const emailValidoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const payload = { nome, telefone, email };
+  // Validações
+  if (!nome || !somenteLetrasRegex.test(nome)) {
+    alert("Nome inválido. Use apenas letras e espaços.");
+    return;
+  }
 
-    if (contatoEmEdicao) {
-      // Atualizar contato existente
-      const response = await fetch(`http://localhost:3000/api/contatos/${contatoEmEdicao}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+  if (!telefone || !somenteNumerosRegex.test(telefone) || telefone.length < 8) {
+    alert("Telefone inválido. Use apenas números com pelo menos 8 dígitos.");
+    return;
+  }
 
-      if (response.ok) {
-        contatoEmEdicao = null;
-        document.getElementById("formContato").style.display = "none";
-        document.getElementById("nome").value = "";
-        document.getElementById("telefone").value = "";
-        document.getElementById("email").value = "";
-        await carregarContatos();
-      } else {
-        alert("Erro ao atualizar o contato.");
-      }
+  if (email && !emailValidoRegex.test(email)) {
+    alert("Formato de e-mail inválido.");
+    return;
+  }
+
+  const payload = { nome, telefone, email };
+
+  if (contatoEmEdicao) {
+    // Atualizar contato existente
+    const response = await fetch(`http://localhost:3000/api/contatos/${contatoEmEdicao}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      contatoEmEdicao = null;
+      document.getElementById("formContato").style.display = "none";
+      document.getElementById("nome").value = "";
+      document.getElementById("telefone").value = "";
+      document.getElementById("email").value = "";
+      await carregarContatos();
     } else {
-      // Criar novo contato
-      payload.usuario_id = usuarioId;
-
-      const response = await fetch("http://localhost:3000/api/contatos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        document.getElementById("formContato").style.display = "none";
-        document.getElementById("nome").value = "";
-        document.getElementById("telefone").value = "";
-        document.getElementById("email").value = "";
-        await carregarContatos();
-      } else {
-        alert("Erro ao salvar contato.");
-      }
+      alert("Erro ao atualizar o contato.");
     }
-  });
+  } else {
+    // Criar novo contato
+    payload.usuario_id = usuarioId;
+
+    const response = await fetch("http://localhost:3000/api/contatos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      document.getElementById("formContato").style.display = "none";
+      document.getElementById("nome").value = "";
+      document.getElementById("telefone").value = "";
+      document.getElementById("email").value = "";
+      await carregarContatos();
+    } else {
+      alert("Erro ao salvar contato.");
+    }
+  }
+});
+
 
   carregarContatos();
 });
